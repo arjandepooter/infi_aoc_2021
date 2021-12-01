@@ -64,7 +64,6 @@ fn find_combination_of_missing_parts<'a>(
     // TODO: could use some memoization
 
     // Try to find a combination of parts that can be used to make the number of parts
-    // The parts are in the order of the number of parts that can be made from them
     if number_of_parts == 0 {
         // If all parts have been used, return the combination
         return if number_of_missing_parts == 0 {
@@ -81,7 +80,7 @@ fn find_combination_of_missing_parts<'a>(
             .map(|&(p, n)| (p, n))
             .collect();
 
-        for number_of_parts_in_combination in 0..=number_of_parts {
+        for number_of_parts_in_combination in (0..=number_of_parts).rev() {
             let removed_parts = number_of_parts_in_combination * amount_of_parts;
             if removed_parts > number_of_missing_parts {
                 break;
